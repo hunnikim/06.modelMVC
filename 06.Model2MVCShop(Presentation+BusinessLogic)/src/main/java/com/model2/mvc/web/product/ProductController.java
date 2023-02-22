@@ -79,6 +79,7 @@ public class ProductController {
 		System.out.println(resultPage);
 		
 		// Model 과 View 연결
+		System.out.println(map);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
@@ -88,7 +89,7 @@ public class ProductController {
 	
 	
 	@RequestMapping("/getProduct.do")
-	public String getProduct( @RequestParam("product") int prodNo , Model model ) throws Exception {
+	public String getProduct( @RequestParam("prodNo") int prodNo , Model model ) throws Exception {
 		
 		System.out.println("/getProduct.do");
 		//Business Logic
@@ -99,28 +100,28 @@ public class ProductController {
 		return "forward:/product/getProduct.jsp";
 	}
 	
-	@RequestMapping("/updateProductView.do")
-	public String updateProductView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
+	@RequestMapping("/updateProduct.do")
+	public String updateProduct( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
 
-		System.out.println("/updateProductView.do");
+		System.out.println("/updateProduct.do");
 		//Business Logic
+		
 		Product product = productService.getProduct(prodNo);
 		// Model 과 View 연결
 		model.addAttribute("product", product);
 		
-		return "forward:/product/updateProduct.jsp";
+		return "forward:/product/updateProductView.jsp";
 	}
 	
-	@RequestMapping("/updateProduct.do")
-	public String updateProduct( @ModelAttribute("product") Product product 
+	@RequestMapping("/updateProductView.do")
+	public String updateProductView( @ModelAttribute("product") Product product 
 								, Model model , HttpSession session) throws Exception{
-
-		System.out.println("/updateProduct.do");
+		
+		System.out.println("/updateProductView.do");
 		//Business Logic
 		productService.updateProduct(product);
-		
+		System.out.println("!!!!--"+product);
 		String sessionId=Integer.toString(product.getProdNo());
-		
 		
 		return "redirect:/getProduct.do?prodNo="+product.getProdNo();
 	}

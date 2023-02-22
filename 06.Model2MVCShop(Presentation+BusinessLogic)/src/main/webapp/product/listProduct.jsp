@@ -31,9 +31,20 @@
 			window="/getProduct.do";
 		}
 	}	
+	<c:if test="${!param.menu.equals(null)}">
+		<c:choose>
+			<c:when test="${param.menu eq 'manage'}">
+				window ="/listProduct.do?menu=manage"
+			</c:when>
+			<c:otherwise> 
+				window ="/getProduct.do"
+			</c:otherwise>
+		</c:choose>
+	</c:if>
+	
 --%>
- 
-
+	
+	
 
 
 
@@ -100,7 +111,7 @@
 	<tr>
 		<td align="right">
 			<select name="searchCondition" class="ct_input_g" style="width:80px">
-			<%--	<option value="0" <%= (searchCondition.equals("0") ? "selected" : "")%>>상품번호</option>
+			<%--<option value="0" <%= (searchCondition.equals("0") ? "selected" : "")%>>상품번호</option>
 				<option value="1" <%= (searchCondition.equals("1") ? "selected" : "")%>>상품명</option>
 				<option value="2" <%= (searchCondition.equals("2") ? "selected" : "")%>>상품가격</option> --%>
 				<option value="0" ${! empty search.searchCondition &&  search.searchCondition==0 ? "selected" : ""}>상품번호</option>
@@ -158,7 +169,16 @@
 			<td align="center">${ i }</td>
 			<td></td>
 			<td align="left">
-				<a href="/getProduct.do?prodNo=${product.prodNo}">${product.prodName}</a>
+				<a href="
+					<c:choose>
+						<c:when test="${param.menu eq('manage')}">
+							/updateProduct.do
+						</c:when>
+						<c:otherwise>
+							/getProduct.do						
+						</c:otherwise>
+					</c:choose>
+				?prodNo=${product.prodNo}">${product.prodName}</a>
 			</td>
 			<td></td>
 			<td align="left">${product.price}</td>

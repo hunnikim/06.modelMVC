@@ -39,7 +39,7 @@ function fncAddProduct(){
 		return;
 	}
 		
-	document.detailForm.action='/updateProduct.do';
+	document.detailForm.action='/updateProductView.do';
 	document.detailForm.submit();
 }
 -->
@@ -50,7 +50,7 @@ function fncAddProduct(){
 
 <form name="detailForm" method="post" >
 
-<input type="hidden" name="prod_No" value="${product.prodNo}"/>
+<input type="hidden" name="prodNo" value="${product.prodNo}"/>
 
 <table width="100%" height="37" border="0" cellpadding="0" cellspacing="0">
 	<tr>
