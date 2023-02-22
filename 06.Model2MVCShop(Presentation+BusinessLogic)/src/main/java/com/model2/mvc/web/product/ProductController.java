@@ -66,7 +66,7 @@ public class ProductController {
 								HttpServletRequest request) throws Exception{
 		
 		System.out.println("/listProduct.do");
-		
+		System.out.println("github 체크리스트");
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
